@@ -14,5 +14,5 @@ public class UnitStatSO : ScriptableObject
     public float atk;
     public float def;
     [Range(0f, 1f)] public float criticalChance;
-    public float gold;
+    public int gold;
 }

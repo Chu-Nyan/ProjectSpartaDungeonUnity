@@ -7,24 +7,30 @@ using UnityEngine;
 
 public enum HUDTextType
 {
-    Name, Level, Exp, Gold, Status, Inven
+    Name = 0, Level, Exp, Gold,
+    Atk = 4, Def, Hp, Cri,
+    Inven = 8
 }
 
 public class HUDManager : MonoBehaviour
 {
-    public Action updateAllHUD;
     private PlayerSO playerSO;
     private StringBuilder newText;
-
     [SerializeField] private TMP_Text[] HUDTexts;
-
+    
+    public Action updateAllHUD;
+    public Action updateLevelUp;
 
     private void Awake()
     {
         newText = new StringBuilder();
         updateAllHUD += UpdateNameUI;
-        updateAllHUD += UpdateLevelAndExp;
-        updateAllHUD += UpdateGold;
+        updateAllHUD += UpdateLevelAndExpUI;
+        updateAllHUD += UpdateGoldUI;
+        updateAllHUD += UpdateStatusUI;
+
+        updateLevelUp += UpdateLevelAndExpUI;
+        updateLevelUp += UpdateStatusUI;
     }
 
     private void Start()
@@ -39,7 +45,7 @@ public class HUDManager : MonoBehaviour
         HUDTexts[(int)HUDTextType.Name].text = playerSO.unitName;
     }
 
-    private void UpdateLevelAndExp()
+    private void UpdateLevelAndExpUI()
     {
         newText.Clear();
         newText.Append($"Lv.{playerSO.lv}");
@@ -50,8 +56,22 @@ public class HUDManager : MonoBehaviour
         HUDTexts[(int)HUDTextType.Exp].text = newText.ToString();
     }
 
-    private void UpdateGold()
+    private void UpdateGoldUI()
     {
         HUDTexts[(int)HUDTextType.Gold].text = playerSO.gold.ToString();
+    }
+
+    private void UpdateStatusUI()
+    {
+        HUDTexts[(int)HUDTextType.Atk].text = playerSO.atk.ToString();
+        HUDTexts[(int)HUDTextType.Def].text = playerSO.def.ToString();
+
+        newText.Clear();
+        newText.Append($"{playerSO.hp} / {playerSO.maxHp}");
+        HUDTexts[(int)HUDTextType.Hp].text = newText.ToString();
+
+        newText.Clear();
+        newText.Append($"{playerSO.criticalChance*100:N1}%");
+        HUDTexts[(int)HUDTextType.Cri].text = newText.ToString();
     }
 }

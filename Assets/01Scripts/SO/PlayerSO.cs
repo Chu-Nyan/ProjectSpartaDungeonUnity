@@ -9,6 +9,7 @@ using UnityEngine;
 public class PlayerSO : UnitStatSO
 {
     [Header("Current Stat")]
+    public float hp;
     public float exp;
 
 }

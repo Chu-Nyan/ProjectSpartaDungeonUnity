@@ -15,9 +15,10 @@ MonoBehaviour:
   unitName: "\uB178\uC7AC\uC6B0"
   lv: 8
   maxExp: 10
-  maxHp: 5
+  maxHp: 50
   atk: 20
   def: 10
-  criticalChance: 0.1
+  criticalChance: 0.05
   gold: 0
-  exp: 0
+  hp: 10
+  exp: 5
