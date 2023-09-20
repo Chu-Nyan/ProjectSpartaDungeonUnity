@@ -14,7 +14,7 @@ public class Player : Unit
         set
         {
             gold = value;
-            HUDManager.instance.updateGoldHUD();
+            HUDManager.I.updateGoldHUD();
         }
     }
     public float Exp
@@ -24,9 +24,9 @@ public class Player : Unit
         {
             exp = value;
             if (LevelUP())
-                HUDManager.instance.updateAllHUD();
+                HUDManager.I.updateAllHUD();
             else
-                HUDManager.instance.updateLvExpHUD();
+                HUDManager.I.updateLvExpHUD();
         }
     }
 
@@ -35,9 +35,14 @@ public class Player : Unit
         base.Awake();
 
         CallStatSO();
-        inventory.Add(ItemManager.Instance.GetNewEquipmentItem(ItemType.SteelSword));
-        inventory.Add(ItemManager.Instance.GetNewEquipmentItem(ItemType.WoodBow));
-        inventory.Add(ItemManager.Instance.GetNewEquipmentItem(ItemType.WoodShiled));
+
+    }
+
+    private void Start()
+    {
+        ItemManager.I.AddItem(inventory, ItemType.SteelSword);
+        ItemManager.I.AddItem(inventory, ItemType.WoodShiled);
+        ItemManager.I.AddItem(inventory, ItemType.WoodBow);
     }
 
     private bool LevelUP()

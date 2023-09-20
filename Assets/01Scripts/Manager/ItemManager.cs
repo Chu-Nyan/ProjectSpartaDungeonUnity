@@ -4,16 +4,16 @@ using UnityEngine;
 
 public class ItemManager : MonoBehaviour
 {
-    public static ItemManager Instance;
+    public static ItemManager I;
 
     [SerializeField] private EquipmentSO equipmentSO;
 
     private void Awake()
     {
-        Instance = this;
+        I = this;
     }
 
-    public Item GetNewEquipmentItem(ItemType type)
+    private Item GetNewEquipmentData(ItemType type)
     {
         Equipment newItem = new Equipment();
         EquipmentData tempData = equipmentSO.itemData[(int)type];
@@ -31,5 +31,11 @@ public class ItemManager : MonoBehaviour
         return newItem;
     }
 
+    public void AddItem(List<Item> inven, ItemType type)
+    {
+        Item newItem = GetNewEquipmentData(type);
+        inven.Add(newItem);
+        UIManager.I.UpdatePlayerInvenUI();
+    }
 
 }

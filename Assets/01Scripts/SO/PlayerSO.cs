@@ -12,14 +12,10 @@ public class PlayerSO : UnitStatSO
     public float hp;
     public float exp;
 
-
-
     public void SaveCurrentPlayer(Player player)
     {
         hp = player.hp; 
         exp = player.Exp;
         gold = player.Gold;
     }
-
-
 }

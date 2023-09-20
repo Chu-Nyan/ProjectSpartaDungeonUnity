@@ -21,6 +21,6 @@ public class Unit : MonoBehaviour
 
     protected virtual void Awake()
     {
-        inventory = new List<Item>();
+        inventory = new List<Item>(24);
     }
 }

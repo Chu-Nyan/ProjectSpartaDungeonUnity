@@ -15,7 +15,7 @@ MonoBehaviour:
   itemData:
   - itemType: 0
     equipmentType: 1
-    itemSprite: {fileID: 1995069809, guid: 8c9bfbc73920074488bb34aa534bfdee, type: 3}
+    itemSprite: {fileID: 21300000, guid: 58417479e4d7dd543aadc7da809a2c9e, type: 3}
     itemName: "\uB098\uBB34 \uAC80"
     desc: "\uBB34\uB09C\uD55C \uAC80"
     gold: 500
@@ -25,7 +25,7 @@ MonoBehaviour:
     criticalChance: 0
   - itemType: 1
     equipmentType: 2
-    itemSprite: {fileID: -1394452706, guid: 8c9bfbc73920074488bb34aa534bfdee, type: 3}
+    itemSprite: {fileID: 21300000, guid: 1839c182cf2145946abc08c3ef6ab54f, type: 3}
     itemName: "\uB098\uBB34 \uD65C"
     desc: "\uD0C4\uC131\uC788\uB294 \uBAA9\uC7AC\uB97C \uC0AC\uC6A9\uD558\uC5EC \uB9CC\uB4E4
       \uD65C"
@@ -36,7 +36,7 @@ MonoBehaviour:
     criticalChance: 0
   - itemType: 2
     equipmentType: 0
-    itemSprite: {fileID: -1245809544, guid: 8c9bfbc73920074488bb34aa534bfdee, type: 3}
+    itemSprite: {fileID: 21300000, guid: effb6674d3b32804da03e8172b653ad7, type: 3}
     itemName: "\uB098\uBB34 \uBC29\uD328"
     desc: "\uADF8\uB798\uB3C4 \uC788\uB2E4\uB294 \uAC8C \uB4E0\uB4E0\uD55C \uBC29\uD328"
     gold: 700

@@ -7,8 +7,7 @@ using UnityEngine;
 
 public enum HUDTextType
 {
-    Name = 0, Level, Exp, Gold,
-    Atk = 4, Def, Hp, Cri,
+    Name = 0, Level, Exp, Gold
 }
 public enum HUDImageType
 {
@@ -17,7 +16,7 @@ public enum HUDImageType
 
 public class HUDManager : MonoBehaviour
 {
-    public static HUDManager instance;
+    public static HUDManager I;
     private Player player;
     private StringBuilder newText;
     
@@ -31,13 +30,12 @@ public class HUDManager : MonoBehaviour
 
     private void Awake()
     {
-        instance = this;
+        I = this;
         newText = new StringBuilder();
 
         updateAllHUD += UpdateNameUI;
         updateAllHUD += UpdateLevelAndExpUI;
         updateAllHUD += UpdateGoldUI;
-        updateAllHUD += UpdateStatusUI;
 
         updateLvExpHUD += UpdateLevelAndExpUI;
 
@@ -47,7 +45,7 @@ public class HUDManager : MonoBehaviour
 
     private void Start()
     {
-        player = GameManager.instance.player;
+        player = GameManager.I.player;
 
         fullExpSize = HUDImages[(int)HUDImageType.ExpBar].sizeDelta;
         updateAllHUD?.Invoke();
@@ -79,17 +77,5 @@ public class HUDManager : MonoBehaviour
 
 
     //제거 할 것
-    private void UpdateStatusUI()
-    {
-        HUDTexts[(int)HUDTextType.Atk].text = player.atk.ToString();
-        HUDTexts[(int)HUDTextType.Def].text = player.def.ToString();
 
-        newText.Clear();
-        newText.Append($"{player.hp} / {player.maxHp}");
-        HUDTexts[(int)HUDTextType.Hp].text = newText.ToString();
-
-        newText.Clear();
-        newText.Append($"{player.criticalChance*100:N1}%");
-        HUDTexts[(int)HUDTextType.Cri].text = newText.ToString();
-    }
 }
