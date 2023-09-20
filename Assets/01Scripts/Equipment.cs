@@ -12,10 +12,7 @@ public class Equipment : Item
     [Range(0f, 1f)] public float criticalChance;
 }
 
-public class Consumable : Item
-{
-
-}
+public class Consumable : Item { }
 
 public class Item
 {

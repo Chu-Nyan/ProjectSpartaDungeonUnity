@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "UnitStat", menuName = "SO/Player", order = 1)]
+[CreateAssetMenu(fileName = "UnitStat", menuName = "SO/Unit/Player", order = 1)]
 public class PlayerSO : UnitStatSO
 {
     [Header("Current Stat")]

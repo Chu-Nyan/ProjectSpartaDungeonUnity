@@ -5,28 +5,31 @@ using System.Text;
 using TMPro;
 using UnityEngine;
 
-public enum HUDTextType
-{
-    Name = 0, Level, Exp, Gold
-}
-public enum HUDImageType
-{
-    ExpBar
-}
 
 public class HUDManager : MonoBehaviour
 {
+    public enum HUDTextType
+    {
+        Name, Level, Exp, Gold
+    }
+    public enum HUDImageType
+    {
+        ExpBar
+    }
+
     public static HUDManager I;
+
     private Player player;
     private StringBuilder newText;
     
     [SerializeField] private TMP_Text[] HUDTexts;
     [SerializeField] private RectTransform[] HUDImages;
+
     public Action updateAllHUD;
     public Action updateLvExpHUD;
     public Action updateGoldHUD;
 
-    Vector2 fullExpSize;
+    Vector2 fullExpSize; // 현재 Exp 막대바 표현
 
     private void Awake()
     {
@@ -40,7 +43,6 @@ public class HUDManager : MonoBehaviour
         updateLvExpHUD += UpdateLevelAndExpUI;
 
         updateGoldHUD += UpdateGoldUI;
-
     }
 
     private void Start()
@@ -74,8 +76,4 @@ public class HUDManager : MonoBehaviour
     {
         HUDTexts[(int)HUDTextType.Gold].text = player.Gold.ToString();
     }
-
-
-    //제거 할 것
-
 }

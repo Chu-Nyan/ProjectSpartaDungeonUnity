@@ -2,8 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
-[CreateAssetMenu(fileName = "UnitStat", menuName = "SO/Unit", order = 1)]
 public class UnitStatSO : ScriptableObject
 {
     [Header("Base Stat")]

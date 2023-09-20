@@ -6,8 +6,8 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager I;
 
-    [SerializeField] public Player player;
-    [SerializeField] public PlayerSO playerSO;
+    public Player player;
+    public PlayerSO playerSO;
 
     private void Awake()
     {

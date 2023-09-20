@@ -35,11 +35,11 @@ public class Player : Unit
         base.Awake();
 
         CallStatSO();
-
     }
 
     private void Start()
     {
+        //
         ItemManager.I.AddItem(inventory, ItemType.SteelSword);
         ItemManager.I.AddItem(inventory, ItemType.WoodShiled);
         ItemManager.I.AddItem(inventory, ItemType.WoodBow);

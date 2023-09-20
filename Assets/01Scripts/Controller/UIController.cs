@@ -60,12 +60,10 @@ public class UIController : MonoBehaviour
     public void CheatDelItem()
     {
         List<Item> inven = GameManager.I.player.inventory;
-        int random = UnityEngine.Random.Range(0,inven.Count);
-
+        if (inven.Count == 0)
+            return;
+        
+        int random = UnityEngine.Random.Range(0, inven.Count);
         inven.RemoveAt(random);
-    }
-    private void Example()
-    {
-        GameManager.I.player.atk = 0; // 변수로 바로 접근하여 수정
     }
 }

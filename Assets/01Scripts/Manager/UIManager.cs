@@ -14,11 +14,12 @@ public class UIManager : MonoBehaviour
     }
 
     public static UIManager I;
+
     private StringBuilder newText;
     private Player player;
 
     [SerializeField] private List<Image> itemSpriteList;
-    [SerializeField] TMP_Text[] statText;
+    [SerializeField] TMP_Text[] statTexts;
 
     private void Awake()
     {
@@ -34,16 +35,16 @@ public class UIManager : MonoBehaviour
 
     public void UpdateStatusUI()
     {
-        statText[(int)StatTextType.Atk].text = player.atk.ToString();
-        statText[(int)StatTextType.Def].text = player.def.ToString();
+        statTexts[(int)StatTextType.Atk].text = player.atk.ToString();
+        statTexts[(int)StatTextType.Def].text = player.def.ToString();
 
         newText.Clear();
         newText.Append($"{player.hp} / {player.maxHp}");
-        statText[(int)StatTextType.Hp].text = newText.ToString();
+        statTexts[(int)StatTextType.Hp].text = newText.ToString();
 
         newText.Clear();
         newText.Append($"{player.criticalChance * 100:N1}%");
-        statText[(int)StatTextType.Cri].text = newText.ToString();
+        statTexts[(int)StatTextType.Cri].text = newText.ToString();
     }
 
     public void UpdatePlayerInvenUI()

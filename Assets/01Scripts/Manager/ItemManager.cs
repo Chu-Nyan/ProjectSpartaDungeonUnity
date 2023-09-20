@@ -13,7 +13,7 @@ public class ItemManager : MonoBehaviour
         I = this;
     }
 
-    private Item GetNewEquipmentData(ItemType type)
+    private Item GetEquipmentData(ItemType type)
     {
         Equipment newItem = new Equipment();
         EquipmentData tempData = equipmentSO.itemData[(int)type];
@@ -33,7 +33,7 @@ public class ItemManager : MonoBehaviour
 
     public void AddItem(List<Item> inven, ItemType type)
     {
-        Item newItem = GetNewEquipmentData(type);
+        Item newItem = GetEquipmentData(type);
         inven.Add(newItem);
         UIManager.I.UpdatePlayerInvenUI();
     }
