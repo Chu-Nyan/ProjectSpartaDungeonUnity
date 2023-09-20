@@ -9,69 +9,87 @@ public enum HUDTextType
 {
     Name = 0, Level, Exp, Gold,
     Atk = 4, Def, Hp, Cri,
-    Inven = 8
+}
+public enum HUDImageType
+{
+    ExpBar
 }
 
 public class HUDManager : MonoBehaviour
 {
-    private PlayerSO playerSO;
+    public static HUDManager instance;
+    private Player player;
     private StringBuilder newText;
-    [SerializeField] private TMP_Text[] HUDTexts;
     
+    [SerializeField] private TMP_Text[] HUDTexts;
+    [SerializeField] private RectTransform[] HUDImages;
     public Action updateAllHUD;
-    public Action updateLevelUp;
+    public Action updateLvExpHUD;
+    public Action updateGoldHUD;
+
+    Vector2 fullExpSize;
 
     private void Awake()
     {
+        instance = this;
         newText = new StringBuilder();
+
         updateAllHUD += UpdateNameUI;
         updateAllHUD += UpdateLevelAndExpUI;
         updateAllHUD += UpdateGoldUI;
         updateAllHUD += UpdateStatusUI;
 
-        updateLevelUp += UpdateLevelAndExpUI;
-        updateLevelUp += UpdateStatusUI;
+        updateLvExpHUD += UpdateLevelAndExpUI;
+
+        updateGoldHUD += UpdateGoldUI;
+
     }
 
     private void Start()
     {
-        playerSO = GameManager.I.playerSO;
+        player = GameManager.instance.player;
 
+        fullExpSize = HUDImages[(int)HUDImageType.ExpBar].sizeDelta;
         updateAllHUD?.Invoke();
     }
 
     private void UpdateNameUI()
     {
-        HUDTexts[(int)HUDTextType.Name].text = playerSO.unitName;
+        HUDTexts[(int)HUDTextType.Name].text = player.unitName;
     }
 
     private void UpdateLevelAndExpUI()
     {
         newText.Clear();
-        newText.Append($"Lv.{playerSO.lv}");
+        newText.Append($"Lv.{player.lv}");
         HUDTexts[(int)HUDTextType.Level].text = newText.ToString();
 
         newText.Clear();
-        newText.Append($"{playerSO.exp}/{playerSO.maxHp}");
+        newText.Append($"{player.Exp}/{player.maxExp}");
         HUDTexts[(int)HUDTextType.Exp].text = newText.ToString();
+
+        
+        HUDImages[(int)HUDImageType.ExpBar].sizeDelta = new Vector2((player.Exp / player.maxExp)*fullExpSize.x, fullExpSize.y);
     }
 
     private void UpdateGoldUI()
     {
-        HUDTexts[(int)HUDTextType.Gold].text = playerSO.gold.ToString();
+        HUDTexts[(int)HUDTextType.Gold].text = player.Gold.ToString();
     }
 
+
+    //제거 할 것
     private void UpdateStatusUI()
     {
-        HUDTexts[(int)HUDTextType.Atk].text = playerSO.atk.ToString();
-        HUDTexts[(int)HUDTextType.Def].text = playerSO.def.ToString();
+        HUDTexts[(int)HUDTextType.Atk].text = player.atk.ToString();
+        HUDTexts[(int)HUDTextType.Def].text = player.def.ToString();
 
         newText.Clear();
-        newText.Append($"{playerSO.hp} / {playerSO.maxHp}");
+        newText.Append($"{player.hp} / {player.maxHp}");
         HUDTexts[(int)HUDTextType.Hp].text = newText.ToString();
 
         newText.Clear();
-        newText.Append($"{playerSO.criticalChance*100:N1}%");
+        newText.Append($"{player.criticalChance*100:N1}%");
         HUDTexts[(int)HUDTextType.Cri].text = newText.ToString();
     }
 }
