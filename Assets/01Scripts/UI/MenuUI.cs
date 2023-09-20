@@ -1,19 +1,17 @@
-using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UIManager : MonoBehaviour
+public class MenuUI : MonoBehaviour
 {
     public enum StatTextType
     {
         Atk,Def,Hp,Cri
     }
 
-    public static UIManager I;
+    public static MenuUI I;
 
     private StringBuilder newText;
     private Player player;
@@ -73,8 +71,5 @@ public class UIManager : MonoBehaviour
             itemSpriteList[i].sprite = playerInven[i].itemSprite;
             itemSpriteList[i].gameObject.SetActive(true);
         }
-
     }
-
-
 }

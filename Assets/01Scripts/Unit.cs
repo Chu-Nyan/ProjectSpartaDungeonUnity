@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -15,12 +16,14 @@ public class Unit : MonoBehaviour
     protected int gold;
 
     public List<Item> inventory;
-    public List<Item> unitEquipment;
+    public List<Equipment> unitEquipment;
 
     public virtual int Gold { get { return gold; } set { gold = value; } }
 
     protected virtual void Awake()
     {
         inventory = new List<Item>(24);
+        unitEquipment = new List<Equipment>(Enum.GetValues(typeof(EquipmentType)).Length);
+        unitEquipment[1] = new Equipment();
     }
 }

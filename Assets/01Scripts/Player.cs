@@ -14,7 +14,7 @@ public class Player : Unit
         set
         {
             gold = value;
-            HUDManager.I.updateGoldHUD();
+            HUD.I.updateGoldHUD();
         }
     }
     public float Exp
@@ -24,9 +24,9 @@ public class Player : Unit
         {
             exp = value;
             if (LevelUP())
-                HUDManager.I.updateAllHUD();
+                HUD.I.updateAllHUD();
             else
-                HUDManager.I.updateLvExpHUD();
+                HUD.I.updateLvExpHUD();
         }
     }
 
@@ -39,7 +39,6 @@ public class Player : Unit
 
     private void Start()
     {
-        //
         ItemManager.I.AddItem(inventory, ItemType.SteelSword);
         ItemManager.I.AddItem(inventory, ItemType.WoodShiled);
         ItemManager.I.AddItem(inventory, ItemType.WoodBow);
@@ -49,7 +48,7 @@ public class Player : Unit
     {
         if (exp < maxExp)
             return false;
-        
+
         lv++;
         exp -= maxExp;
         return true;

@@ -16,7 +16,7 @@ public class Consumable : Item { }
 
 public class Item
 {
-    public ItemType type;
+    public ItemType itemType;
     public Sprite itemSprite;
     public string itemName;
     public string desc;

@@ -1,12 +1,10 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.Text;
 using TMPro;
 using UnityEngine;
 
 
-public class HUDManager : MonoBehaviour
+public class HUD : MonoBehaviour
 {
     public enum HUDTextType
     {
@@ -17,7 +15,7 @@ public class HUDManager : MonoBehaviour
         ExpBar
     }
 
-    public static HUDManager I;
+    public static HUD I;
 
     private Player player;
     private StringBuilder newText;

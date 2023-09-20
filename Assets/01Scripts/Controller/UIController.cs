@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class UIController : MonoBehaviour
 {
-    private UIManager UM;
+    private MenuUI UM;
 
     [SerializeField] GameObject InventoryUI;
     [SerializeField] GameObject statusUI;
@@ -12,7 +12,7 @@ public class UIController : MonoBehaviour
 
     private void Start()
     {
-        UM = UIManager.I;
+        UM = MenuUI.I;
     }
 
     public void ActiveTagetUI(GameObject openUI)

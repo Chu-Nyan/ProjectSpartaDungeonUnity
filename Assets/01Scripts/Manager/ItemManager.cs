@@ -16,8 +16,11 @@ public class ItemManager : MonoBehaviour
     private Item GetEquipmentData(ItemType type)
     {
         Equipment newItem = new Equipment();
+        newItem.itemType = type;
+        if (type == ItemType.Empty)
+            return newItem;
+
         EquipmentData tempData = equipmentSO.itemData[(int)type];
-        newItem.type = tempData.itemType;
         newItem.equipmentType = tempData.equipmentType;
         newItem.itemSprite = tempData.itemSprite;
         newItem.itemName = tempData.itemName;
@@ -35,7 +38,9 @@ public class ItemManager : MonoBehaviour
     {
         Item newItem = GetEquipmentData(type);
         inven.Add(newItem);
-        UIManager.I.UpdatePlayerInvenUI();
+        MenuUI.I.UpdatePlayerInvenUI();
     }
+
+
 
 }

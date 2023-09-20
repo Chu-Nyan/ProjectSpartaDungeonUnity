@@ -6,7 +6,8 @@ using UnityEngine;
 public enum ItemType
 {
     SteelSword, WoodBow,
-    WoodShiled
+    WoodShiled,
+    Empty = 999
 }
 
 public enum EquipmentType
