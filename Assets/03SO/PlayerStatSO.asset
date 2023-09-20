@@ -13,12 +13,12 @@ MonoBehaviour:
   m_Name: PlayerStatSO
   m_EditorClassIdentifier: 
   unitName: "\uB178\uC7AC\uC6B0"
-  lv: 44
-  maxExp: 10
+  lv: 1
+  maxExp: 100
   maxHp: 50
   atk: 20
   def: 10
   criticalChance: 0.05
-  gold: 0
+  gold: 1100
   hp: 10
-  exp: 5
+  exp: 0

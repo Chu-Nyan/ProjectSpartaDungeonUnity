@@ -14,5 +14,13 @@ public class Unit : MonoBehaviour
     public float criticalChance;
     protected int gold;
 
+    public List<Item> inventory;
+    public List<Item> unitEquipment;
+
     public virtual int Gold { get { return gold; } set { gold = value; } }
+
+    protected virtual void Awake()
+    {
+        inventory = new List<Item>();
+    }
 }

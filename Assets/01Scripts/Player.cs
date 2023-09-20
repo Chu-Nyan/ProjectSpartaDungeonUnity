@@ -30,9 +30,14 @@ public class Player : Unit
         }
     }
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
+
         CallStatSO();
+        inventory.Add(ItemManager.Instance.GetNewEquipmentItem(ItemType.SteelSword));
+        inventory.Add(ItemManager.Instance.GetNewEquipmentItem(ItemType.WoodBow));
+        inventory.Add(ItemManager.Instance.GetNewEquipmentItem(ItemType.WoodShiled));
     }
 
     private bool LevelUP()
