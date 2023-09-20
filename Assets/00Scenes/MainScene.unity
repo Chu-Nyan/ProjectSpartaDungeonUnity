@@ -3049,7 +3049,7 @@ MonoBehaviour:
   - {fileID: 1714458621}
   - {fileID: 1869274018}
   - {fileID: 1201067024}
-  statText:
+  statTexts:
   - {fileID: 1724161282}
   - {fileID: 1866737593}
   - {fileID: 147039832}
