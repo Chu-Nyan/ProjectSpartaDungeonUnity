@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7674662299277976506}
   - component: {fileID: 7522562392442468583}
   - component: {fileID: 8741195052628446257}
+  - component: {fileID: -6774461404625186465}
   m_Layer: 5
   m_Name: ItemSlot
   m_TagString: Untagged
@@ -90,11 +91,41 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56802183029c1694cbdc0dd4b310c1d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  owner: {fileID: 0}
   itemImage: {fileID: 7522562392442468583}
   itemIndex: 0
   itemType: 0
   statusText: {fileID: 670906203757213220}
   isStack: 0
+--- !u!114 &-6774461404625186465
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5189282786576661527}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 4
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 8741195052628446257}
+          m_TargetAssemblyTypeName: ItemSlot, Assembly-CSharp
+          m_MethodName: OnClickSlot
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &5373034041022322100
 GameObject:
   m_ObjectHideFlags: 0
