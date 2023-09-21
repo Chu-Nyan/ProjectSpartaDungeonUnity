@@ -11,12 +11,10 @@ public class UIController : MonoBehaviour
 
     [SerializeField] InventoryUI invenUI;
     [SerializeField] StatusUI statusUI;
+    [SerializeField] ScreenLogUI screenLogUI;
     public  SlotMenuUI slotMenuUI;
-    [SerializeField] TMP_Text screenLogUI;
-
     public ItemSlot selectedInvenSlot;
 
-    private WaitForSecondsRealtime popupTime;
     private StringBuilder newText;
 
 
@@ -25,7 +23,6 @@ public class UIController : MonoBehaviour
         I = this;
 
         newText = new();
-        popupTime = new WaitForSecondsRealtime(3.0f);
     }
 
     // 정보 UI 열기
@@ -34,17 +31,6 @@ public class UIController : MonoBehaviour
         statusUI.On();
         statusUI.Refresh(GameManager.I.player);
     }
-
-    // 스크린 로그UI 출력
-    private IEnumerator ActiveScreenLog(string textLog)
-    {
-        screenLogUI.transform.parent.gameObject.SetActive(true);
-        screenLogUI.text = textLog;
-        yield return popupTime;
-        screenLogUI.transform.parent.gameObject.SetActive(false);
-    }
-
-    #region 인벤토리 컨트롤러
 
     // 인벤 UI 활성화
     public void ActiveInvenUI(Unit unit)
@@ -79,7 +65,7 @@ public class UIController : MonoBehaviour
 
         selectedInvenSlot.owner.inven.DestoryItem(selectedInvenSlot.invenIndex);
         invenUI.Refresh(selectedInvenSlot.owner,true);
-        StartCoroutine(ActiveScreenLog(newText.ToString()));
+        StartCoroutine(screenLogUI.ActiveScreenLog(newText.ToString()));
         slotMenuUI.Off();
     }
 
@@ -104,12 +90,9 @@ public class UIController : MonoBehaviour
         }
 
         ChangeSlotDatas(selectedInvenSlot.owner);
-        invenUI.Refresh(selectedInvenSlot.owner);
-        StartCoroutine(ActiveScreenLog(newText.ToString()));
+        StartCoroutine(screenLogUI.ActiveScreenLog(newText.ToString()));
         slotMenuUI.Off();
     }
-    #endregion
-
 
     // 플레이어 컨트롤러 부분
     public void CheatForMVC()
@@ -121,7 +104,7 @@ public class UIController : MonoBehaviour
 
     public void CheatAddItem()
     {
-        int random = UnityEngine.Random.Range(0, 3); // 3 장비아이템 끝번호
+        int random = Random.Range(0, 3); // 3 장비아이템 끝번호
         List<Item> inven = GameManager.I.player.inven.itemList;
 
         ItemManager.I.AddItem(inven, (ItemType)random);

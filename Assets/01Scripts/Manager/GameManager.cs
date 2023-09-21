@@ -8,8 +8,11 @@ public class GameManager : MonoBehaviour
 
     public Player player;
 
+    public WaitForSecondsRealtime popupTime;
+
     private void Awake()
     {
         I = this;
+        popupTime = new WaitForSecondsRealtime(3.0f);
     }
 }
