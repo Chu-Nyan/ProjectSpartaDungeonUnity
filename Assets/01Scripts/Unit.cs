@@ -15,8 +15,13 @@ public class Unit : MonoBehaviour
     public float criticalChance;
     protected int gold;
 
+    // ÅÂ¾î ³¯ °Í
+    public Inventory inven;
+
+    // °ð Á×À» °Í
     public List<Item> inventory;
     public List<Equipment> unitEquipment;
+    //
 
     public virtual int Gold { get { return gold; } set { gold = value; } }
 
@@ -24,6 +29,5 @@ public class Unit : MonoBehaviour
     {
         inventory = new List<Item>(24);
         unitEquipment = new List<Equipment>(Enum.GetValues(typeof(EquipmentType)).Length);
-        unitEquipment[1] = new Equipment();
     }
 }

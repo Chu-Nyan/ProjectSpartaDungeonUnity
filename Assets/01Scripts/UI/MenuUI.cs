@@ -16,7 +16,7 @@ public class MenuUI : MonoBehaviour
     private StringBuilder newText;
     private Player player;
 
-    [SerializeField] private List<Image> itemSpriteList;
+    [SerializeField] private List<ItemSlot> itemSlots;
     [SerializeField] TMP_Text[] statTexts;
 
     private void Awake()
@@ -49,27 +49,27 @@ public class MenuUI : MonoBehaviour
     {
         List<Item> playerInven = GameManager.I.player.inventory;
 
-        for (int i = 0; i < itemSpriteList.Count; i++)
+        for (int i = 0; i < itemSlots.Count; i++)
         {
             if (i >= playerInven.Count)
             {
-                if (itemSpriteList[i].gameObject.activeSelf)
+                if (itemSlots[i].gameObject.activeSelf)
                 {
-                    itemSpriteList[i].gameObject.SetActive(false);
+                    itemSlots[i].gameObject.SetActive(false);
                     continue;
                 }
                 else
                     break;
             }
 
-            if (itemSpriteList[i].sprite == playerInven[i].itemSprite)
+            if (itemSlots[i].itemImage.sprite == playerInven[i].itemSprite)
             {
-                itemSpriteList[i].gameObject.SetActive(true);
+                itemSlots[i].gameObject.SetActive(true);
                 continue;
             }
 
-            itemSpriteList[i].sprite = playerInven[i].itemSprite;
-            itemSpriteList[i].gameObject.SetActive(true);
+            itemSlots[i].itemImage.sprite = playerInven[i].itemSprite;
+            itemSlots[i].gameObject.SetActive(true);
         }
     }
 }

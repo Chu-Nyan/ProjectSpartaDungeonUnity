@@ -51,7 +51,7 @@ public class UIController : MonoBehaviour
 
     public void CheatAddItem()
     {
-        int random = UnityEngine.Random.Range(0, Enum.GetValues(typeof(ItemType)).Length);
+        int random = UnityEngine.Random.Range(0, Enum.GetValues(typeof(ItemType)).Length -1 ); // -1¿∫ empty ≈∏¿‘
         List<Item> inven = GameManager.I.player.inventory;
 
         ItemManager.I.AddItem(inven, (ItemType)random);
