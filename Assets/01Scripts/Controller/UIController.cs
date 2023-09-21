@@ -6,38 +6,36 @@ using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 
+
 public class UIController : MonoBehaviour
 {
     //공통 부분
     public static UIController I;
-    private MenuUI UM;
+    private StatusUI UM;
 
-    [SerializeField] GameObject InventoryUI;
+    [SerializeField] InventoryUI invenUI;
     [SerializeField] GameObject statusUI;
     [SerializeField] GameObject slotMenuUI;
     [SerializeField] TMP_Text screenLogUI;
+
     private GameObject lastOpenUI;
+    public ItemSlot selectedInvenSlot;
 
     private WaitForSecondsRealtime popupTime;
     private StringBuilder newText;
 
-    // 인벤토리 부분
-    public Unit InvenViewSelectOwner;
-    public ItemSlot invenViewSelectSlot;
-    public List<GameObject> activeInventorys;
 
     private void Awake()
     {
         I = this;
 
-        activeInventorys = new();
         newText = new();
         popupTime = new WaitForSecondsRealtime(3.0f);
     }
 
     private void Start()
     {
-        UM = MenuUI.I;
+        UM = StatusUI.I;
     }
 
     // 범용
@@ -52,16 +50,12 @@ public class UIController : MonoBehaviour
         lastOpenUI.SetActive(false);
     }
     // 선택 UI 닫기
-    public void InactiveClickUI()
-    { }
-
-    // 인벤 UI 열기
-    public void ActivePlayerInvenUI()
+    public void InactiveClickUI(BaseUI target)
     {
-        InventoryUI.SetActive(true);
-        lastOpenUI = InventoryUI;
-        UM.UpdatePlayerInvenUI();
+        target.Off();
     }
+
+
     // 정보 UI 열기
     public void ActiveStatusUI()
     {
@@ -79,17 +73,41 @@ public class UIController : MonoBehaviour
     }
 
     #region 인벤토리 컨트롤러
-    public void ActiveSlotMenu(Vector3 slotPos)
+
+    // 인벤 UI 활성화
+    public void ActiveInvenUI(Unit unit)
     {
-        slotMenuUI.transform.position = slotPos;
+        ChangeSlotDatas(unit);
+        invenUI.Refresh(unit);
+        invenUI.On();
+        lastOpenUI = invenUI.gameObject;
+    }
+
+    // 아이템 슬롯 데이터 교체
+    private void ChangeSlotDatas(Unit unit)
+    {
+        Inventory itemList = unit.inven;
+        for (int i = 0; i < itemList.itemList.Count; i++)
+        {
+            invenUI.itemSlots[i].Initialize(unit, itemList.itemList[i], i);
+        }
+    }
+
+    // 아이템 슬롯 메뉴 열기
+    public void ActiveSlotMenu(ItemSlot slot)
+    {
+        selectedInvenSlot = slot;
+        slotMenuUI.transform.position = selectedInvenSlot.transform.position;
         slotMenuUI.SetActive(true);
     }
 
+    // 아이템 파괴
     public void DestroyThisItem()
     {
+        selectedInvenSlot.owner.inven.DestoryItem(selectedInvenSlot.invenIndex);
+        invenUI.Refresh(selectedInvenSlot.owner);
         newText.Clear();
-        newText.Append($"{invenViewSelectSlot.itemName}을(를) 파괴하였습니다.");
-        StopCoroutine("ActiveScreenLog");
+        newText.Append($"{selectedInvenSlot.itemName}을(를) 파괴하였습니다.");
         StartCoroutine(ActiveScreenLog(newText.ToString()));
         slotMenuUI.SetActive(false);
     }
@@ -97,8 +115,7 @@ public class UIController : MonoBehaviour
     public void EquipThisItem()
     {
         newText.Clear();
-        newText.Append($"{invenViewSelectSlot.itemName}을(를) 착용하였습니다.");
-        StopCoroutine("ActiveScreenLog");
+        newText.Append($"{selectedInvenSlot.itemName}을(를) 착용하였습니다.");
         StartCoroutine(ActiveScreenLog(newText.ToString()));
         slotMenuUI.SetActive(false);
     }
@@ -124,15 +141,15 @@ public class UIController : MonoBehaviour
 
     public void CheatAddItem()
     {
-        int random = UnityEngine.Random.Range(0, Enum.GetValues(typeof(ItemType)).Length -1 ); // -1은 empty 타입
-        List<Item> inven = GameManager.I.player.inventory;
+        int random = UnityEngine.Random.Range(0, 3); // 3 장비아이템 끝번호
+        List<Item> inven = GameManager.I.player.inven.itemList;
 
         ItemManager.I.AddItem(inven, (ItemType)random);
     }
 
     public void CheatDelItem()
     {
-        List<Item> inven = GameManager.I.player.inventory;
+        List<Item> inven = GameManager.I.player.inven.itemList;
         if (inven.Count == 0)
             return;
         

@@ -7,7 +7,6 @@ public class GameManager : MonoBehaviour
     public static GameManager I;
 
     public Player player;
-    public PlayerSO playerSO;
 
     private void Awake()
     {

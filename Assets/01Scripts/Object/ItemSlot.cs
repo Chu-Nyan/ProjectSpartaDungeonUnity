@@ -4,18 +4,27 @@ using UnityEngine.UI;
 
 public class ItemSlot : MonoBehaviour
 {
+    public Image Image;
+    public TMP_Text statusText;
+
     public Unit owner;
-    public Image itemImage;
-    public int itemIndex;
+    public Sprite itemSprite;
+    public int invenIndex;
     public string itemName;
     public ItemType itemType;
-    public TMP_Text statusText;
-    public bool isStack;
+    public bool isEquip;
+
+    public void Initialize(Unit owner,Item item,int index)
+    {
+        this.owner = owner;
+        itemSprite = item.itemSprite;
+        invenIndex = index;
+        itemName = item.itemName;
+        itemType = item.itemType;
+    }
 
     public void OnClickSlot()
     {
-        UIController.I.InvenViewSelectOwner = owner;
-        UIController.I.invenViewSelectSlot= this;
-        UIController.I.ActiveSlotMenu(transform.position);
+        UIController.I.ActiveSlotMenu(this);
     }
 }

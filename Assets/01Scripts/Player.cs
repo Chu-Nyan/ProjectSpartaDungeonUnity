@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Player : Unit
 {
-    [SerializeField] private PlayerSO stat;
+    [SerializeField] private PlayerSO baseStat;
 
     private float exp;
 
@@ -39,9 +39,9 @@ public class Player : Unit
 
     private void Start()
     {
-        ItemManager.I.AddItem(inventory, ItemType.SteelSword);
-        ItemManager.I.AddItem(inventory, ItemType.WoodShiled);
-        ItemManager.I.AddItem(inventory, ItemType.WoodBow);
+        ItemManager.I.AddItem(inven.itemList, ItemType.SteelSword);
+        ItemManager.I.AddItem(inven.itemList, ItemType.WoodShiled);
+        ItemManager.I.AddItem(inven.itemList, ItemType.WoodBow);
     }
 
     private bool LevelUP()
@@ -56,15 +56,15 @@ public class Player : Unit
 
     private void CallStatSO()
     {
-        unitName = stat.unitName;
-        lv = stat.lv;
-        maxExp = stat.maxExp;
-        exp = stat.exp;
-        maxHp = stat.maxHp;
+        unitName = baseStat.unitName;
+        lv = baseStat.lv;
+        maxExp = baseStat.maxExp;
+        exp = baseStat.exp;
+        maxHp = baseStat.maxHp;
         hp = maxHp;
-        atk = stat.atk;
-        def = stat.def;
-        criticalChance = stat.criticalChance;
-        gold = stat.gold;
+        atk = baseStat.atk;
+        def = baseStat.def;
+        criticalChance = baseStat.criticalChance;
+        gold = baseStat.gold;
     }
 }

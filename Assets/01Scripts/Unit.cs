@@ -17,17 +17,13 @@ public class Unit : MonoBehaviour
 
     // ÅÂ¾î ³¯ °Í
     public Inventory inven;
-
-    // °ð Á×À» °Í
-    public List<Item> inventory;
     public List<Equipment> unitEquipment;
-    //
 
     public virtual int Gold { get { return gold; } set { gold = value; } }
 
     protected virtual void Awake()
     {
-        inventory = new List<Item>(24);
+        inven = new Inventory();
         unitEquipment = new List<Equipment>(Enum.GetValues(typeof(EquipmentType)).Length);
     }
 }

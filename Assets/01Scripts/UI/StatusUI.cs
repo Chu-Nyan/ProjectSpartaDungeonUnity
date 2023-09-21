@@ -4,14 +4,14 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class MenuUI : MonoBehaviour
+public class StatusUI : MonoBehaviour
 {
     public enum StatTextType
     {
         Atk,Def,Hp,Cri
     }
 
-    public static MenuUI I;
+    public static StatusUI I;
 
     private StringBuilder newText;
     private Player player;
@@ -21,7 +21,6 @@ public class MenuUI : MonoBehaviour
 
     private void Awake()
     {
-        I = this;
         newText = new StringBuilder();
     }
 
@@ -45,31 +44,5 @@ public class MenuUI : MonoBehaviour
         statTexts[(int)StatTextType.Cri].text = newText.ToString();
     }
 
-    public void UpdatePlayerInvenUI()
-    {
-        List<Item> playerInven = GameManager.I.player.inventory;
 
-        for (int i = 0; i < itemSlots.Count; i++)
-        {
-            if (i >= playerInven.Count)
-            {
-                if (itemSlots[i].gameObject.activeSelf)
-                {
-                    itemSlots[i].gameObject.SetActive(false);
-                    continue;
-                }
-                else
-                    break;
-            }
-
-            if (itemSlots[i].itemImage.sprite == playerInven[i].itemSprite)
-            {
-                itemSlots[i].gameObject.SetActive(true);
-                continue;
-            }
-
-            itemSlots[i].itemImage.sprite = playerInven[i].itemSprite;
-            itemSlots[i].gameObject.SetActive(true);
-        }
-    }
 }

@@ -91,12 +91,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56802183029c1694cbdc0dd4b310c1d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  owner: {fileID: 0}
-  itemImage: {fileID: 7522562392442468583}
-  itemIndex: 0
-  itemType: 0
+  Image: {fileID: 7522562392442468583}
   statusText: {fileID: 670906203757213220}
-  isStack: 0
+  owner: {fileID: 0}
+  itemSprite: {fileID: 0}
+  invenIndex: 0
+  itemName: 
+  itemType: 0
+  isEquip: 0
 --- !u!114 &-6774461404625186465
 MonoBehaviour:
   m_ObjectHideFlags: 0
