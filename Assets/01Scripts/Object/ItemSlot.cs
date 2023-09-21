@@ -8,19 +8,39 @@ public class ItemSlot : MonoBehaviour
     public TMP_Text statusText;
 
     public Unit owner;
-    public Sprite itemSprite;
     public int invenIndex;
-    public string itemName;
     public ItemType itemType;
-    public bool isEquip;
+    public string itemName;
+    public bool isEquiped;
+    public int stack;
 
     public void Initialize(Unit owner,Item item,int index)
     {
         this.owner = owner;
-        itemSprite = item.itemSprite;
+        Image.sprite = item.itemSprite;
         invenIndex = index;
         itemName = item.itemName;
         itemType = item.itemType;
+        if ((int)itemType <100)
+        {
+            Equipment equipment = (Equipment)item;
+            isEquiped = equipment.isEquiped;
+        }
+
+        CheckEquiped();
+    }
+
+    private void CheckEquiped()
+    {
+        if (isEquiped == true)
+        {
+            statusText.text = "E";
+            statusText.gameObject.SetActive(true);
+        }
+        else
+        {
+            statusText.gameObject.SetActive(false);
+        }
     }
 
     public void OnClickSlot()

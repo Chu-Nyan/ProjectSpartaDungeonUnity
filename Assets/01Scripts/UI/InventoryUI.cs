@@ -4,15 +4,32 @@ using UnityEngine;
 
 public class InventoryUI : BaseUI
 {
+    protected override void Awake()
+    {
+        uiType = UIType.Inven;
+    }
+
+    public override void Off()
+    {
+        base.Off();
+        if (!UIController.I.slotMenuUI.gameObject.activeSelf
+            || UIController.I.slotMenuUI == null)
+            return;
+        UIController.I.slotMenuUI.Off();
+    }
+
     public List<ItemSlot> itemSlots;
 
-    public void Refresh(Unit target)
+    public void Refresh(Unit target, bool isHard = false)
     {
-        int count = target.inven.itemList.Count;
+        if (isHard == true)
+            UIController.I.ChangeSlotDatas(target);
+
+        int checkOverCount = target.inven.itemList.Count;
 
         for (int i = 0; i < itemSlots.Count; i++)
         {
-            if (i >= count)
+            if (i >= checkOverCount)
             {
                 if (itemSlots[i].gameObject.activeSelf)
                 {
@@ -24,14 +41,6 @@ public class InventoryUI : BaseUI
             }
 
             itemSlots[i].gameObject.SetActive(true);
-            itemSlots[i].Image.sprite = itemSlots[i].itemSprite;
-            if (itemSlots[i].isEquip == true)
-            {
-                itemSlots[i].statusText.text = "E";
-            }
-            continue;
         }
     }
-
-
 }

@@ -1,24 +1,19 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 
 
 public class UIController : MonoBehaviour
 {
-    //공통 부분
     public static UIController I;
-    private StatusUI UM;
 
     [SerializeField] InventoryUI invenUI;
-    [SerializeField] GameObject statusUI;
-    [SerializeField] GameObject slotMenuUI;
+    [SerializeField] StatusUI statusUI;
+    public  SlotMenuUI slotMenuUI;
     [SerializeField] TMP_Text screenLogUI;
 
-    private GameObject lastOpenUI;
     public ItemSlot selectedInvenSlot;
 
     private WaitForSecondsRealtime popupTime;
@@ -33,36 +28,13 @@ public class UIController : MonoBehaviour
         popupTime = new WaitForSecondsRealtime(3.0f);
     }
 
-    private void Start()
-    {
-        UM = StatusUI.I;
-    }
-
-    // 범용
-    public void ActiveTagetUI(GameObject openUI)
-    {
-        openUI.SetActive(true);
-        lastOpenUI = openUI;
-    }
-    // 마지막 UI 닫기
-    public void InactiveLastOpenUI()
-    {
-        lastOpenUI.SetActive(false);
-    }
-    // 선택 UI 닫기
-    public void InactiveClickUI(BaseUI target)
-    {
-        target.Off();
-    }
-
-
     // 정보 UI 열기
     public void ActiveStatusUI()
     {
-        statusUI.SetActive(true);
-        lastOpenUI = statusUI;
-        UM.UpdateStatusUI();
+        statusUI.On();
+        statusUI.Refresh(GameManager.I.player);
     }
+
     // 스크린 로그UI 출력
     private IEnumerator ActiveScreenLog(string textLog)
     {
@@ -80,11 +52,10 @@ public class UIController : MonoBehaviour
         ChangeSlotDatas(unit);
         invenUI.Refresh(unit);
         invenUI.On();
-        lastOpenUI = invenUI.gameObject;
     }
 
-    // 아이템 슬롯 데이터 교체
-    private void ChangeSlotDatas(Unit unit)
+    // 아이템 슬롯들의 데이터 교체
+    public void ChangeSlotDatas(Unit unit)
     {
         Inventory itemList = unit.inven;
         for (int i = 0; i < itemList.itemList.Count; i++)
@@ -97,38 +68,47 @@ public class UIController : MonoBehaviour
     public void ActiveSlotMenu(ItemSlot slot)
     {
         selectedInvenSlot = slot;
-        slotMenuUI.transform.position = selectedInvenSlot.transform.position;
-        slotMenuUI.SetActive(true);
+        slotMenuUI.On(slot.transform.position);
     }
 
     // 아이템 파괴
     public void DestroyThisItem()
     {
-        selectedInvenSlot.owner.inven.DestoryItem(selectedInvenSlot.invenIndex);
-        invenUI.Refresh(selectedInvenSlot.owner);
         newText.Clear();
         newText.Append($"{selectedInvenSlot.itemName}을(를) 파괴하였습니다.");
+
+        selectedInvenSlot.owner.inven.DestoryItem(selectedInvenSlot.invenIndex);
+        invenUI.Refresh(selectedInvenSlot.owner,true);
         StartCoroutine(ActiveScreenLog(newText.ToString()));
-        slotMenuUI.SetActive(false);
+        slotMenuUI.Off();
     }
 
+    // 아이템 착용
     public void EquipThisItem()
     {
         newText.Clear();
-        newText.Append($"{selectedInvenSlot.itemName}을(를) 착용하였습니다.");
+        newText.Append($"{selectedInvenSlot.itemName}을(를)");
+
+        EquipResult result = selectedInvenSlot.owner.inven.EquipItem(selectedInvenSlot.invenIndex);
+        switch (result)
+        {
+            case EquipResult.Success:
+                newText.Append("착용하였습니다.");
+                break;
+            case EquipResult.Remove:
+                newText.Append("제거하였습니다.");
+                break;
+            case EquipResult.Fail:
+                newText.Append("실패하였습니다.");
+                break;
+        }
+
+        ChangeSlotDatas(selectedInvenSlot.owner);
+        invenUI.Refresh(selectedInvenSlot.owner);
         StartCoroutine(ActiveScreenLog(newText.ToString()));
-        slotMenuUI.SetActive(false);
+        slotMenuUI.Off();
     }
     #endregion
-
-
-
-
-
-
-
-
-
 
 
     // 플레이어 컨트롤러 부분
@@ -145,15 +125,5 @@ public class UIController : MonoBehaviour
         List<Item> inven = GameManager.I.player.inven.itemList;
 
         ItemManager.I.AddItem(inven, (ItemType)random);
-    }
-
-    public void CheatDelItem()
-    {
-        List<Item> inven = GameManager.I.player.inven.itemList;
-        if (inven.Count == 0)
-            return;
-        
-        int random = UnityEngine.Random.Range(0, inven.Count);
-        inven.RemoveAt(random);
     }
 }

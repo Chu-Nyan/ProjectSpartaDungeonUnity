@@ -39,7 +39,4 @@ public class ItemManager : MonoBehaviour
         Item newItem = GetEquipmentData(type);
         inven.Add(newItem);
     }
-
-
-
 }
