@@ -51,6 +51,8 @@
 📌 2. Inventory 보기, HUD빼고 모든 UI와 UIcontroller사용 , Cocoa MVC모델
 ![](https://velog.velcdn.com/images/jwn7003/post/cab0277a-7fee-46f9-b6ba-8c9dc6e8eec7/image.png)
 
+아이템을 착용하는 방법을 나타내었습니다
+
 이벤트 트리거는 어디다 두어야할지 몰라서 UI에 넣고 작성하였습니다.<br>
 **_#2_** 1번과 다르게 호출할 때 필요한 인자들도 같이 보냈습니다.<br>
 평소에는 리스트로 착용한 장비를 만들었는데 이번에는 딕셔너리도 한 번 사용 해보고싶어서 큰 의미없이 사용하였습니다.<br>
