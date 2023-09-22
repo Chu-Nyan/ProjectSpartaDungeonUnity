@@ -21,7 +21,7 @@ public class Inventory
         Initialize();
     }
 
-    // #2 인벤토리를 초기화하는 과정에서 할당을 안해주고 EquipItem() 실행 시 키 값이 없다고 오류가 나오는데
+    // #1 인벤토리를 초기화하는 과정에서 할당을 안해주고 EquipItem() 실행 시 키 값이 없다고 오류가 나오는데
     // 그래서 저는 EquipItem()에 따로 예외를 두어서 매번 추가할지 검사하기보다는 몰아서해놓자라는 마음으로 작성하였습니다.
     public void Initialize()
     {

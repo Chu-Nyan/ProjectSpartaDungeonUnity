@@ -1919,6 +1919,9 @@ MonoBehaviour:
   invenUI: {fileID: 335081401}
   statusUI: {fileID: 913571182}
   screenLogUI: {fileID: 1740741465}
+  buttons:
+  - {fileID: 1586373879}
+  - {fileID: 1869331934}
   slotMenuUI: {fileID: 660847331}
   selectedInvenSlot: {fileID: 0}
 --- !u!114 &1179502332
@@ -3281,17 +3284,17 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 913571182}
-          m_TargetAssemblyTypeName: BaseUI, Assembly-CSharp
-          m_MethodName: Off
-          m_Mode: 1
+        - m_Target: {fileID: 1179502331}
+          m_TargetAssemblyTypeName: UIController, Assembly-CSharp
+          m_MethodName: DeactivateUI
+          m_Mode: 2
           m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_ObjectArgument: {fileID: 913571182}
+            m_ObjectArgumentAssemblyTypeName: BaseUI, Assembly-CSharp
             m_IntArgument: 0
             m_FloatArgument: 0
             m_StringArgument: 
-            m_BoolArgument: 0
+            m_BoolArgument: 1
           m_CallState: 2
 --- !u!1 &1586373873
 GameObject:
@@ -3305,6 +3308,7 @@ GameObject:
   - component: {fileID: 1586373876}
   - component: {fileID: 1586373875}
   - component: {fileID: 1586373877}
+  - component: {fileID: 1586373879}
   m_Layer: 5
   m_Name: Status
   m_TagString: Untagged
@@ -3400,6 +3404,19 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!114 &1586373879
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1586373873}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e972643aa7ecfcb4fa1deec85f91a46c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  uiType: 4
 --- !u!1 &1598002761
 GameObject:
   m_ObjectHideFlags: 0
@@ -4607,6 +4624,7 @@ GameObject:
   - component: {fileID: 1869331932}
   - component: {fileID: 1869331931}
   - component: {fileID: 1869331933}
+  - component: {fileID: 1869331934}
   m_Layer: 5
   m_Name: Inventory
   m_TagString: Untagged
@@ -4702,6 +4720,19 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!114 &1869331934
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1869331929}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e972643aa7ecfcb4fa1deec85f91a46c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  uiType: 4
 --- !u!1 &1907064276
 GameObject:
   m_ObjectHideFlags: 0
@@ -5412,6 +5443,34 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1179502330}
     m_Modifications:
+    - target: {fileID: 2005616868725621919, guid: 54d7e6f9756fe2447b2e128aac7f07e2, type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2005616868725621919, guid: 54d7e6f9756fe2447b2e128aac7f07e2, type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1179502331}
+    - target: {fileID: 2005616868725621919, guid: 54d7e6f9756fe2447b2e128aac7f07e2, type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: DeactivateUI
+      objectReference: {fileID: 0}
+    - target: {fileID: 2005616868725621919, guid: 54d7e6f9756fe2447b2e128aac7f07e2, type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: UIController, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 2005616868725621919, guid: 54d7e6f9756fe2447b2e128aac7f07e2, type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_BoolArgument
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2005616868725621919, guid: 54d7e6f9756fe2447b2e128aac7f07e2, type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
+      value: 
+      objectReference: {fileID: 335081401}
+    - target: {fileID: 2005616868725621919, guid: 54d7e6f9756fe2447b2e128aac7f07e2, type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: BaseUI, Assembly-CSharp
+      objectReference: {fileID: 0}
     - target: {fileID: 2641074942452154113, guid: 54d7e6f9756fe2447b2e128aac7f07e2, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5

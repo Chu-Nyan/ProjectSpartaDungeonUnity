@@ -16,7 +16,7 @@ public class StatusUI : BaseUI
 
     protected override void Awake()
     {
-        uiType = UIType.Inven;
+        uiType = UIType.Status;
         newText = new StringBuilder();
     }
 

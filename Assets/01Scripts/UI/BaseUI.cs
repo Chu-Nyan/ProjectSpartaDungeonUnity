@@ -6,6 +6,7 @@ public enum UIType
     Inven,
     SlotMenu,
     ScreenLog,
+    Button,
     Defalut
 }
 

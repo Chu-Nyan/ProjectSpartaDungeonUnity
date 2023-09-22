@@ -12,7 +12,8 @@ public class UIController : MonoBehaviour
     [SerializeField] InventoryUI invenUI;
     [SerializeField] StatusUI statusUI;
     [SerializeField] ScreenLogUI screenLogUI;
-    public  SlotMenuUI slotMenuUI;
+    [SerializeField] ButtonUI[] buttons;
+    public SlotMenuUI slotMenuUI;
     public ItemSlot selectedInvenSlot;
 
     private StringBuilder newText;
@@ -25,9 +26,37 @@ public class UIController : MonoBehaviour
         newText = new();
     }
 
+
+    public void DeactivateUI(BaseUI UI)
+    {
+        switch (UI.uiType)
+        {
+            case UIType.Status:
+            case UIType.Inven:
+                 SwitchButtons(true);
+                break;
+            default:
+                break;
+        }
+        UI.Off();
+    }
+
+    // 버튼 온오프
+    public void SwitchButtons(bool isOn)
+    {
+        foreach (ButtonUI btn in buttons)
+        {
+            if (isOn == true)
+                btn.On();
+            else
+                btn.Off();
+        }
+    }
+
     // 정보 UI 열기
     public void ActiveStatusUI()
     {
+        SwitchButtons(false);
         statusUI.On();
         statusUI.Refresh(GameManager.I.player);
     }
@@ -37,6 +66,7 @@ public class UIController : MonoBehaviour
     {
         ChangeSlotDatas(unit);
         invenUI.Refresh(unit);
+        SwitchButtons(false);
         invenUI.On();
     }
 
@@ -64,7 +94,7 @@ public class UIController : MonoBehaviour
         newText.Append($"{selectedInvenSlot.itemName}을(를) 파괴하였습니다.");
 
         selectedInvenSlot.owner.inven.DestoryItem(selectedInvenSlot.invenIndex);
-        invenUI.Refresh(selectedInvenSlot.owner,true);
+        invenUI.Refresh(selectedInvenSlot.owner, true);
         StartCoroutine(screenLogUI.ActiveScreenLog(newText.ToString()));
         slotMenuUI.Off();
     }
